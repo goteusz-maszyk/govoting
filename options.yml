@@ -1,0 +1,9 @@
+choiceGroups:
+  przewodniczacy:
+    name: Przewodniczący
+    members:
+      - Mati
+      - Wojtek
+      - Gromek
+
+securityCode: haslo572

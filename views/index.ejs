@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8' />
+  <title>
+    Szkolne wybory samorządowe
+  </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link href="/styles.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class='container mt-4 mb-4'>
+    <h1>Szkolne wybory samorządowe</h1>
+    <form action="#" id="passForm">
+      <input type="password" placeholder="Podaj hasło by odblokować" class="form-control" id="password" autofocus/>
+      <div class="invalid-feedback" id="invalid-pass" style="display: none;">To nie to hasło cwaniaku</div>
+    </form>
+    <form action='vote' method='post' style="display: none;" id="mainForm">
+      <input type="hidden" name="security-code" id="security-code" />
+      <% for (const choiceGroup in choices) { %>
+        <h2><%= choices[choiceGroup].name %></h2>
+        <ul>
+          <% for (const choice in choices[choiceGroup].members) { %>
+          <li>
+            <input class="btn-check" type='radio' autocomplete="off" name='vote-<%= choiceGroup %>' value='<%= choice %>' id='vote-<%= choice %>' required />
+            <label class='btn btn-outline-secondary' for='vote-<%= choice %>'>
+              <%= choices[choiceGroup].members[choice] %>
+            </label>
+          </li>
+          <% } %>
+        </ul>
+      <% } %>
+      <button type='submit' class='btn btn-warning'>Oddaj głos!</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('passForm').addEventListener('submit', (event) => {
+      const pass = document.forms["passForm"]["password"].value;
+      fetch("/verifycode", {
+        method: 'POST',
+        headers: {pass: pass}
+      }).then((res) => {
+        if(res.status == 200) {
+          document.getElementById('passForm').style.display = 'none';
+          document.getElementById('mainForm').style.display = '';
+          document.forms["passForm"]["password"].value = "";
+          document.forms["mainForm"]["security-code"].value = pass;
+        } else {
+          document.getElementById("invalid-pass").style.display = '';
+          
+          document.forms["passForm"]["password"].classList.add('is-invalid');
+        }
+      })
+
+      event.preventDefault()
+      return false;
+    })
+  </script>
+</body>
+
+</html>
