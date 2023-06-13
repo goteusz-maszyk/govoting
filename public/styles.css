@@ -1,5 +1,7 @@
 html, body {
   font-family: "Comic Sans MS";
+  display: flex;
+  flex-direction: column;
 }
 
 label {
@@ -19,8 +21,21 @@ ul {
 
 #password {
   margin-top: 30px;
+  max-width: 50%;
 }
 
 p {
   font-size: 20px;
+}
+header {
+  font-size: 65px;
+  padding-left: 230px;
+}
+#header-img {
+  align-self: flex-start;
+  position: absolute;
+}
+#header-box {
+  padding: 30px;
+  background-color: #eeeeee;
 }

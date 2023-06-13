@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+import expressEjsLayouts from 'express-ejs-layouts';
 import { existsSync, readFileSync, writeFile } from 'fs';
 import { createServer } from 'http';
 import yaml from 'yaml';
@@ -11,8 +12,11 @@ const options = yaml.parse(optionsYaml)
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.set('view engine', 'ejs');
 app.use('/', express.static('public'))
+app.use(expressEjsLayouts);
+
+app.set('view engine', 'ejs');
+
 
 const voteResults = existsSync("./results.json") ? JSON.parse(readFileSync("./results.json")) : {}
 
