@@ -2,8 +2,9 @@ choiceGroups:
   przewodniczacy:
     name: Przewodniczący
     members:
-      - Mati
-      - Wojtek
-      - Gromek
+      - Antoni Frankiewicz
+      - Emma Czapla
+      - Rafał Kęsek
+      - Dawid Babraj
 
 securityCode: haslo572
