@@ -4,7 +4,10 @@
 </form>
 <form action='vote' method='post' style="display: none;" id="mainForm">
   <input type="hidden" name="security-code" id="security-code" />
+  <p>Wybierz swojego preferowanego kandydata z listy:</p>
+  <div id="groups-box">
   <% for (const choiceGroup in choices) { %>
+    <div class="group-box">
     <h2><%= choices[choiceGroup].name %></h2>
     <ul>
       <% for (const choice in choices[choiceGroup].members) { %>
@@ -16,7 +19,9 @@
       </li>
       <% } %>
     </ul>
+    </div>
   <% } %>
+  </div>
   <button type='submit' class='btn btn-warning'>Oddaj głos!</button>
 </form>
 

@@ -71,7 +71,7 @@ app.get('/getresults', (req, res) => {
   res.render('results', { results: voteResults, choices: options.choiceGroups })
 })
 const port = process.env.PORT || 3000
-const path = "192.168.0.192"
+const path = "127.0.0.1"
 server.listen(port, path, () => {
   console.log(`Voting server listening on http://${path}:${port}`)
 })
